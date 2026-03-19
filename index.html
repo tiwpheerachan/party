@@ -5,301 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ลงทะเบียนงานเลี้ยงบริษัท</title>
   <meta name="theme-color" content="#ffffff" />
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
   </style>
-
   <style>
     :root{
-      --text:#0f172a;
-      --muted:#64748b;
-      --line:#e6eef6;
-      --field:#f6f8fb;
-      --primary:#11a8ff;
-      --primary2:#0b8fe4;
-
-      --radiusShell:22px;
-      --radiusTop:26px;
-
-      --okBg:#e9fff2;
-      --okText:#096a3a;
-      --errBg:#fff1f2;
-      --errText:#9f1239;
-      --warnBg:#fff7ed;
-      --warnText:#9a3412;
-
-      --shadow: 0 18px 60px rgba(15,23,42,.10);
-      --shadow2: 0 10px 24px rgba(15,23,42,.10);
+      --text:#0f172a; --muted:#64748b; --line:#e6eef6; --field:#f6f8fb;
+      --primary:#11a8ff; --primary2:#0b8fe4; --radiusShell:22px; --radiusTop:26px;
+      --okBg:#e9fff2; --okText:#096a3a; --errBg:#fff1f2; --errText:#9f1239;
+      --warnBg:#fff7ed; --warnText:#9a3412;
+      --shadow: 0 18px 60px rgba(15,23,42,.10); --shadow2: 0 10px 24px rgba(15,23,42,.10);
     }
-
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: "Google Sans", sans-serif;
-      font-optical-sizing: auto;
-      font-style: normal;
-      font-variation-settings: "GRAD" 0;
-      background:#fff;
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .page{
-      min-height:100%;
-      display:flex;
-      justify-content:center;
-      padding: 18px 14px 44px;
-    }
-    .container{ width:min(460px, 100%); }
-
-    .shell{
-      border: 1px solid rgba(226,232,240,.9);
-      border-radius: var(--radiusShell);
-      overflow:hidden;
-      background:#fff;
-      box-shadow: var(--shadow);
-    }
-
-    .hero{
-      position: relative;
-      height: 210px;
-      background: #f1f5f9;
-      overflow:hidden;
-    }
-    .heroImg{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      object-fit:cover;
-      display:block;
-      transform: translateZ(0);
-    }
-    .hero:after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0) 55%);
-      pointer-events:none;
-    }
-
-    .heroControls{
-      position:absolute;
-      inset: 12px 12px auto 12px;
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      z-index:2;
-    }
-
-    .langWrap{ position: relative; }
-    .iconBtn{
-      width: 38px;
-      height: 38px;
-      border-radius: 999px;
-      border: 1px solid rgba(226,232,240,.95);
-      background: rgba(255,255,255,.86);
-      backdrop-filter: blur(6px);
-      box-shadow: 0 10px 20px rgba(15,23,42,.10);
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:0;
-    }
-    .iconBtn:active{ transform: translateY(1px); }
-
-    .langMenu{
-      position:absolute;
-      right:0;
-      top: 46px;
-      min-width: 170px;
-      background:#fff;
-      border: 1px solid rgba(226,232,240,.95);
-      border-radius: 16px;
-      box-shadow: 0 18px 50px rgba(15,23,42,.18);
-      padding: 6px;
-      display:none;
-      z-index: 50;
-    }
+    body{ margin:0; font-family:"Google Sans",sans-serif; background:#fff; color:var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    .page{ min-height:100%; display:flex; justify-content:center; padding:18px 14px 44px; }
+    .container{ width:min(460px,100%); }
+    .shell{ border:1px solid rgba(226,232,240,.9); border-radius:var(--radiusShell);
+      overflow:hidden; background:#fff; box-shadow:var(--shadow); }
+    .hero{ position:relative; height:210px; background:#f1f5f9; overflow:hidden; }
+    .heroImg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; transform:translateZ(0); }
+    .hero:after{ content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0) 55%); pointer-events:none; }
+    .heroControls{ position:absolute; inset:12px 12px auto 12px; display:flex;
+      align-items:center; justify-content:flex-end; z-index:2; }
+    .langWrap{ position:relative; }
+    .iconBtn{ width:38px; height:38px; border-radius:999px; border:1px solid rgba(226,232,240,.95);
+      background:rgba(255,255,255,.86); backdrop-filter:blur(6px);
+      box-shadow:0 10px 20px rgba(15,23,42,.10); cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center; padding:0; }
+    .iconBtn:active{ transform:translateY(1px); }
+    .langMenu{ position:absolute; right:0; top:46px; min-width:170px; background:#fff;
+      border:1px solid rgba(226,232,240,.95); border-radius:16px;
+      box-shadow:0 18px 50px rgba(15,23,42,.18); padding:6px; display:none; z-index:50; }
     .langMenu.open{ display:block; }
-    .langItem{
-      width:100%;
-      text-align:left;
-      border:none;
-      background:transparent;
-      padding: 10px 10px;
-      border-radius: 12px;
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      font-family: "Google Sans", sans-serif;
-      font-size: 14px;
-      color: var(--text);
-    }
-    .langItem:hover{ background: rgba(15,23,42,.04); }
-    .langTag{ font-size: 12px; color: var(--muted); }
-
-    .mainCard{
-      position: relative;
-      margin-top: -34px;
-      background:#fff;
-      border-top-left-radius: var(--radiusTop);
-      border-top-right-radius: var(--radiusTop);
-      box-shadow: var(--shadow2);
-      border-top: 1px solid rgba(226,232,240,.9);
-      padding: 16px 16px 18px;
-    }
-
-    .title{
-      margin: 0;
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: -0.2px;
-    }
-    .subtitle{
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 12.8px;
-      line-height: 1.45;
-    }
-
-    form{ margin-top: 14px; }
-    label{
-      display:block;
-      font-size: 13px;
-      font-weight: 700;
-      margin: 12px 0 7px;
-      color: rgba(15,23,42,.92);
-    }
-    input, select{
-      width:100%;
-      border: 1px solid rgba(226,232,240,.95);
-      border-radius: 12px;
-      padding: 12px 12px;
-      background: var(--field);
-      color: var(--text);
-      outline:none;
-      font-size: 16px;
-      font-family: "Google Sans", sans-serif;
-    }
-    input::placeholder{ color: rgba(100,116,139,.80); }
-    input:focus, select:focus{
-      border-color: rgba(17,168,255,.55);
-      box-shadow: 0 0 0 4px rgba(17,168,255,.14);
-      background:#fff;
-    }
-
-    .row{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-    }
-    @media (max-width:360px){
-      .row{ grid-template-columns: 1fr; }
-    }
-
-    select{
-      appearance:none;
-      background-image:
-        linear-gradient(45deg, transparent 50%, rgba(15,23,42,.55) 50%),
-        linear-gradient(135deg, rgba(15,23,42,.55) 50%, transparent 50%);
-      background-position:
-        calc(100% - 18px) 55%,
-        calc(100% - 12px) 55%;
-      background-size: 6px 6px, 6px 6px;
-      background-repeat:no-repeat;
-      padding-right: 34px;
-    }
-
-    .hint{
-      margin-top: 6px;
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.35;
-    }
-    .pill{
-      display:none;
-      margin-top:8px;
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(226,232,240,.95);
-      background:#fff;
-      color: var(--muted);
-    }
-
-    .btn{
-      width:100%;
-      margin-top: 14px;
-      border:none;
-      border-radius: 12px;
-      padding: 12px 14px;
-      font-weight: 700;
-      font-size: 16px;
-      cursor:pointer;
-      color:#fff;
-      background: linear-gradient(180deg, var(--primary), var(--primary2));
-      box-shadow: 0 14px 28px rgba(17,168,255,.22);
-      font-family: "Google Sans", sans-serif;
-    }
+    .langItem{ width:100%; text-align:left; border:none; background:transparent;
+      padding:10px 10px; border-radius:12px; cursor:pointer; display:flex;
+      align-items:center; justify-content:space-between; gap:10px;
+      font-family:"Google Sans",sans-serif; font-size:14px; color:var(--text); }
+    .langItem:hover{ background:rgba(15,23,42,.04); }
+    .langTag{ font-size:12px; color:var(--muted); }
+    .mainCard{ position:relative; margin-top:-34px; background:#fff;
+      border-top-left-radius:var(--radiusTop); border-top-right-radius:var(--radiusTop);
+      box-shadow:var(--shadow2); border-top:1px solid rgba(226,232,240,.9); padding:16px 16px 18px; }
+    .title{ margin:0; font-size:24px; font-weight:700; letter-spacing:-0.2px; }
+    .subtitle{ margin:6px 0 0; color:var(--muted); font-size:12.8px; line-height:1.45; }
+    form{ margin-top:14px; }
+    label{ display:block; font-size:13px; font-weight:700; margin:12px 0 7px; color:rgba(15,23,42,.92); }
+    input,select{ width:100%; border:1px solid rgba(226,232,240,.95); border-radius:12px;
+      padding:12px 12px; background:var(--field); color:var(--text); outline:none;
+      font-size:16px; font-family:"Google Sans",sans-serif; }
+    input::placeholder{ color:rgba(100,116,139,.80); }
+    input:focus,select:focus{ border-color:rgba(17,168,255,.55); box-shadow:0 0 0 4px rgba(17,168,255,.14); background:#fff; }
+    .row{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    @media(max-width:360px){ .row{ grid-template-columns:1fr; } }
+    select{ appearance:none;
+      background-image:linear-gradient(45deg,transparent 50%,rgba(15,23,42,.55) 50%),
+        linear-gradient(135deg,rgba(15,23,42,.55) 50%,transparent 50%);
+      background-position:calc(100% - 18px) 55%,calc(100% - 12px) 55%;
+      background-size:6px 6px,6px 6px; background-repeat:no-repeat; padding-right:34px; }
+    .hint{ margin-top:6px; font-size:12px; color:var(--muted); line-height:1.35; }
+    .pill{ display:none; margin-top:8px; font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(226,232,240,.95); background:#fff; color:var(--muted); }
+    .btn{ width:100%; margin-top:14px; border:none; border-radius:12px; padding:12px 14px;
+      font-weight:700; font-size:16px; cursor:pointer; color:#fff;
+      background:linear-gradient(180deg,var(--primary),var(--primary2));
+      box-shadow:0 14px 28px rgba(17,168,255,.22); font-family:"Google Sans",sans-serif; }
     .btn:disabled{ opacity:.65; cursor:not-allowed; }
-    .btn:active{ transform: translateY(1px); }
-
-    .helper{
-      margin-top:10px;
-      font-size:12px;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .toast{
-      display:none;
-      margin-top:12px;
-      padding:10px 12px;
-      border-radius:12px;
-      font-size:13px;
-      border:1px solid rgba(226,232,240,.95);
-      line-height: 1.45;
-      white-space: pre-line;
-    }
-    .toast.ok{ display:block; background:var(--okBg); color:var(--okText); border-color: rgba(16,185,129,.25); }
-    .toast.err{ display:block; background:var(--errBg); color:var(--errText); border-color: rgba(244,63,94,.25); }
-    .toast.warn{ display:block; background:var(--warnBg); color:var(--warnText); border-color: rgba(249,115,22,.25); }
-
-    /* reg id badge inside toast */
-    .regBadge{
-      display:inline-block;
-      margin-top:8px;
-      background:#fff;
-      border:2px solid #11a8ff;
-      border-radius:10px;
-      padding:6px 18px;
-      font-size:20px;
-      font-weight:800;
-      letter-spacing:3px;
-      color:#0b8fe4;
-    }
-
-    .footer{
-      padding: 14px 10px 16px;
-      text-align:center;
-      font-size: 12px;
-      color: rgba(100,116,139,.85);
-      background:#fff;
-    }
+    .btn:active{ transform:translateY(1px); }
+    .helper{ margin-top:10px; font-size:12px; color:var(--muted); line-height:1.45; }
+    .toast{ display:none; margin-top:12px; padding:10px 12px; border-radius:12px;
+      font-size:13px; border:1px solid rgba(226,232,240,.95); line-height:1.45; white-space:pre-line; }
+    .toast.ok{ display:block; background:var(--okBg); color:var(--okText); border-color:rgba(16,185,129,.25); }
+    .toast.err{ display:block; background:var(--errBg); color:var(--errText); border-color:rgba(244,63,94,.25); }
+    .toast.warn{ display:block; background:var(--warnBg); color:var(--warnText); border-color:rgba(249,115,22,.25); }
+    .regBadge{ display:inline-block; margin-top:8px; background:#fff; border:2px solid #11a8ff;
+      border-radius:10px; padding:6px 18px; font-size:20px; font-weight:800;
+      letter-spacing:3px; color:#0b8fe4; }
+    .tableBadge{ display:inline-flex; align-items:center; gap:7px; margin-top:10px;
+      background:#eff6ff; border:1.5px solid #11a8ff; border-radius:10px;
+      padding:7px 18px; font-size:15px; font-weight:700; color:#0b8fe4; }
+    .tableBadge svg{ flex-shrink:0; }
+    .footer{ padding:14px 10px 16px; text-align:center; font-size:12px;
+      color:rgba(100,116,139,.85); background:#fff; }
   </style>
 </head>
-
 <body>
   <main class="page">
     <div class="container">
       <section class="shell">
         <div class="hero">
           <img class="heroImg" alt="Hero" src="./public/images/lo11.png" />
-
           <div class="heroControls">
             <div class="langWrap">
               <button class="iconBtn" id="langBtn" type="button" aria-label="Change language">
@@ -309,7 +106,6 @@
                   <path d="M12 2C9 5.3 9 18.7 12 22C15 18.7 15 5.3 12 2Z" stroke="rgba(15,23,42,.50)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-
               <div class="langMenu" id="langMenu" role="menu" aria-label="Language menu">
                 <button class="langItem" type="button" data-lang="th"><span>ไทย</span><span class="langTag">TH</span></button>
                 <button class="langItem" type="button" data-lang="en"><span>English</span><span class="langTag">EN</span></button>
@@ -330,17 +126,11 @@
             <div class="row">
               <div>
                 <label for="first_name" id="ui_lbl_first">ชื่อจริง</label>
-                <input
-                  id="first_name"
-                  name="first_name"
+                <input id="first_name" name="first_name"
                   placeholder="พิมพ์แล้วเลือกจากรายการ"
-                  list="staffFullnames"
-                  autocomplete="off"
-                  required
-                />
+                  list="staffFullnames" autocomplete="off" required />
                 <div class="hint" id="ui_hint_name">พิมพ์ 2–3 ตัว แล้วเลือกชื่อเต็มจากรายการ</div>
               </div>
-
               <div>
                 <label for="last_name" id="ui_lbl_last">นามสกุล</label>
                 <input id="last_name" name="last_name" placeholder="จะเติมให้อัตโนมัติเมื่อเลือกชื่อ" required />
@@ -353,15 +143,8 @@
               <option value="" disabled selected>เลือกทีมของคุณ</option>
             </select>
 
-            <!-- ✅ NEW: Email field -->
             <label for="email" id="ui_lbl_email">อีเมล</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="your@email.com"
-              required
-            />
+            <input id="email" name="email" type="email" placeholder="your@email.com" required />
             <div class="hint" id="ui_hint_email">ระบบจะส่งรหัสยืนยันและรหัสผู้ลงทะเบียนไปยังอีเมลนี้</div>
 
             <button class="btn" type="submit" id="submitBtn">ส่งลงทะเบียน</button>
@@ -370,8 +153,251 @@
           </form>
 
           <datalist id="staffFullnames">
-            <option value="Xueyan Chen"></option>
+            <option value="CHEN YALING"></option>
+            <option value="CHEN JINSHENG"></option>
+            <option value="CHEN JINBIAO"></option>
+            <option value="CHEN JINZHI"></option>
+            <option value="CHEN JINLIANG"></option>
+            <option value="LI YUXIANG"></option>
+            <option value="วินัย หนูรูปงาม"></option>
+            <option value="ประดิษฐ์ แสนแก้ว"></option>
+            <option value="กันตา วรเพียรกุล"></option>
+            <option value="กฤติณภัทร โตม่วง"></option>
+            <option value="CHEN XUEYAN"></option>
+            <option value="CHEN JUNXIN"></option>
+            <option value="CHEN HONGXIN"></option>
+            <option value="CHEN JUNCHENG"></option>
+            <option value="TANG ZHENG"></option>
+            <option value="LI XIN"></option>
+            <option value="ธนัทปวินทร์ ใจแสน"></option>
+            <option value="สิเรียม สีดาสาร"></option>
+            <option value="อิทธิพร ปะวาระ"></option>
+            <option value="อดุลย์ บัวทอง"></option>
+            <option value="ศุภาพิชญ์ เตชะนันท์มี"></option>
+            <option value="ภิรมย์พร โชคเจริญ"></option>
+            <option value="สงวนลักษณ์ สุวรรณงาม"></option>
+            <option value="ชาญชัย นิโรรัมย์"></option>
+            <option value="สุทธิพงษ์ วงศ์แก้ว"></option>
+            <option value="ณัฐพร ศิริเกษ"></option>
+            <option value="ศิรินัดดา เกตุอุดม"></option>
+            <option value="กุมารี ขำสัจจา"></option>
+            <option value="ณัฐณิชา อังศุโภไคย"></option>
+            <option value="วิภา เอมสรรค์"></option>
+            <option value="กัญญาณัฐ ขำสัจจา"></option>
+            <option value="วิภาณี หลูโป"></option>
+            <option value="นวกชมณ ผลจันทร์"></option>
+            <option value="ศุภิสรา กิติยะวงศ์"></option>
+            <option value="ดวงลดา ดวงใย"></option>
+            <option value="จิตเทพ บุญยืด"></option>
+            <option value="พีรชาญ เหม็งทะเหล็ก"></option>
+            <option value="สรรค์ ธนสิทธิ์สมบูรณ์"></option>
+            <option value="รุ่งวิกรัย จริยธำรงวิทย์"></option>
+            <option value="ณัฐวดี อนุภาพ"></option>
+            <option value="รัตนา สุดตัง"></option>
+            <option value="บุศรา วราฤทธิชัย"></option>
+            <option value="หทัยรัตน์ แก้วโสภานิมิต"></option>
+            <option value="ศรุตยา สงวนวงศ์"></option>
+            <option value="ระวีวรรณ วิริยะธรรมสาร"></option>
+            <option value="ธนัญญา ทองพิมพ์"></option>
+            <option value="ชนิสรา เลิศจตุพร"></option>
+            <option value="ธัญญนันต์ เสริมสายประสิทธิ์"></option>
+            <option value="ณรงค์ศักดิ์ ต้นทอง"></option>
+            <option value="สิรินภา เรืองเดช"></option>
+            <option value="ภัฏ ทองใหม่"></option>
+            <option value="เสาวลักษณ์ เปรมปรุงวิทย์"></option>
+            <option value="ธนเมศฐ์ เลิศสิริสกุลสุข"></option>
+            <option value="ธีรพัฒน์ นุตเจริญกุล"></option>
+            <option value="ศุภศิษฎิ์ สุวรรณอนุรังสี"></option>
+            <option value="วรัญญา ยั่งยืน"></option>
+            <option value="ปรียาวรรณรัฌ พุดพิมเสน"></option>
+            <option value="ปริบุญญา นามบุตร"></option>
+            <option value="อากัณฌา ตรีปากี"></option>
             <option value="ธนารีย์พร สุนทรประสิทธิ์"></option>
+            <option value="วิลาสินี กิจคณะ"></option>
+            <option value="ปารณีย์ อัศวนนทาวงศ์"></option>
+            <option value="กนกพร เต็มวรทรัพย์"></option>
+            <option value="เบญจมาศ เลิศพรตสมบัติ"></option>
+            <option value="พรนัชชา เกียรติมณีศรี"></option>
+            <option value="รุจิรดา ทีปภาศน์"></option>
+            <option value="ไอยวริญ บุญเจริญ"></option>
+            <option value="น้ำเพชร เพ็ชรัตนกูล"></option>
+            <option value="รพีพรรณ วัชรวรรณวงศ์"></option>
+            <option value="ปาณิสรา ศรีวงษ์"></option>
+            <option value="มานิตา มูลทองสงค์"></option>
+            <option value="รินรดา ชัยวงศ์นาถ"></option>
+            <option value="ฉัตรสุรีย์ เมธีโรจน์"></option>
+            <option value="สัณห์สินี แซ่ตัง"></option>
+            <option value="อรกานต์ วิรุฬห์ศิริ"></option>
+            <option value="พรรณวดี เพ็ชรเครือ"></option>
+            <option value="ชลธิชา รุวานนท์"></option>
+            <option value="ณฐพรรณ ทองใบ"></option>
+            <option value="กิ่งแก้ว ศรีโยหะ"></option>
+            <option value="กวิน เอกอรัญพงศ์"></option>
+            <option value="พัชรเดช ทาสะหลี"></option>
+            <option value="ธัญพัธร์ ยืนยงค์นาน"></option>
+            <option value="ชนาธิป ชาญชัยศรี"></option>
+            <option value="ศิวพร มีชัย"></option>
+            <option value="ปพิชญา ไทยสมบูรณ์สุข"></option>
+            <option value="พิพัชร์ ธรรมการฐิติคุณ"></option>
+            <option value="ธนดล วรงค์สิงหรา"></option>
+            <option value="ฉัฐนันท์ อารีเพิ่มพร"></option>
+            <option value="วิชัย เขียวไข่กา"></option>
+            <option value="ชัยเมธ วรรธนเศรณี"></option>
+            <option value="ช่อผกา เศรษฐการวิจิตร"></option>
+            <option value="พัชรวิภา มั่งประสิทธิ์"></option>
+            <option value="นภสร บุณยาคม"></option>
+            <option value="อภิรดี กิจสวัสดิ์"></option>
+            <option value="รมัณยา อินคล้าย"></option>
+            <option value="นพมาศ คงสุข"></option>
+            <option value="ขวัญชัย ขุมทอง"></option>
+            <option value="ณัชชา อ๊อตจังหรีด"></option>
+            <option value="ชัชวาลย์ เสริมสุขประเสริฐ"></option>
+            <option value="สถิรพร ทรัพย์เอนก"></option>
+            <option value="พงษ์เทพ เสเกกุล"></option>
+            <option value="ชลปรียา เสียงเสนาะ"></option>
+            <option value="คุณากร จารุไชยจินดา"></option>
+            <option value="ธนาธรณ์ ศรีคำหู้"></option>
+            <option value="จิตสอางค์ ตุรีย์ตรัยพร"></option>
+            <option value="ยารวี ปลื้มสติ"></option>
+            <option value="พิชชาอร ธีระบุตร"></option>
+            <option value="สุภาวดี มุงเมือง"></option>
+            <option value="ชนิดา นิยมราษฏร์"></option>
+            <option value="พิทยุตม์ คฑารัตน์"></option>
+            <option value="สุชาดา เจ็นประโคน"></option>
+            <option value="สมใจ ทองวงค์"></option>
+            <option value="ข้าวฟ่าง เมฆประดับ"></option>
+            <option value="อาทิตย์ ท้าวกอก"></option>
+            <option value="ดวงแก้ว เทียนน้ำเงิน"></option>
+            <option value="ชลธิชา ศาลางาม"></option>
+            <option value="สายชล บุนนาค"></option>
+            <option value="ณัฐนนท์ เจียรบรรเจิด"></option>
+            <option value="ชุติมา พิณโกศล"></option>
+            <option value="อรนิดา บัวไชโย"></option>
+            <option value="รัฐติยา นิยมอําไพ"></option>
+            <option value="นุชจรินทร์ ทวีศรี"></option>
+            <option value="สุธินี ภู่สิทธิอมรชัย"></option>
+            <option value="ปัณฑารีย์ งามศิริโรจน์"></option>
+            <option value="ธันยธรณ์ จักรไพศาล"></option>
+            <option value="ลิลลี่ หว่อง"></option>
+            <option value="ศุภักษรา ประเสริฐวรนันท์"></option>
+            <option value="เบญญาภา พวงปัญญา"></option>
+            <option value="สุพัฒน์พงศ์ สิทธิชัย"></option>
+            <option value="อาริยา โช"></option>
+            <option value="กษมาพร แก้วลำพูน"></option>
+            <option value="นวินดา บุญชู"></option>
+            <option value="กัลยกร เลี่ยมไพฑูรย์"></option>
+            <option value="ศศิวรรณ วงษ์นิล"></option>
+            <option value="โชติกานต์ สุขสว่างโรจน์"></option>
+            <option value="ธนพร ทรงอยู่"></option>
+            <option value="ธีราพร สุทนต์"></option>
+            <option value="ธนัตดา หุ่นท่าไม้"></option>
+            <option value="มธุรส เอี้ยงทอง"></option>
+            <option value="ภัทรดา ยินดี"></option>
+            <option value="นภัสวรรณ บุญประเสริฐ"></option>
+            <option value="ณัฐพงษ์ กมลนิมิตกุล"></option>
+            <option value="กนกอร คงธนาสมบูรณ์"></option>
+            <option value="ศิริพร มณีบวรสิน"></option>
+            <option value="ฐานิดา บุญชูศรี"></option>
+            <option value="ฐานิษา บุญชูศรี"></option>
+            <option value="ธิติมา มาลีรัตน์"></option>
+            <option value="ธัญพร แถวเเถื่อน"></option>
+            <option value="กมลชนก บัวประทุม"></option>
+            <option value="ธัญชนก คำมี"></option>
+            <option value="มณฑล เจนนภาภัณฑ์กิจ"></option>
+            <option value="ภาวิณี นามนนท์"></option>
+            <option value="กันตพงศ์ เกิดสุริยวงษ์"></option>
+            <option value="พสิษฐ์ ธีระเลิศวงศ์"></option>
+            <option value="วิชชา ดาเพ็ง"></option>
+            <option value="ภูวนารถ ลัดดาวัลย์"></option>
+            <option value="สุชญา สุภัทรวณิช"></option>
+            <option value="เพชรน้ำหนึ่ง ลิมปจิตคุตาภรณ์"></option>
+            <option value="นัฐธินี เสาสูง"></option>
+            <option value="ศรีนภา ตันงาม"></option>
+            <option value="ทัชชาพิชญ์ ชยรัฐสิริมงคล"></option>
+            <option value="ชลิดา เพิ่มชาติ"></option>
+            <option value="ณัฐนันท์ ด่านแก้ว"></option>
+            <option value="อนุชา ร้อยแก้ว"></option>
+            <option value="พุฒิพงศ์ ศรีศุภวัฒนะ"></option>
+            <option value="ฐิติรัตน์ พานทอง"></option>
+            <option value="สุกัญญา คำสวาสดิ์"></option>
+            <option value="ชนิตา กัลยาณภาคย์"></option>
+            <option value="ศิริศักดิ์ รักพร้า"></option>
+            <option value="วิรัญญา วันสืบ"></option>
+            <option value="ชณิตา พึ่งสุรภาพ"></option>
+            <option value="วชิราภรณ์ นีละมัย"></option>
+            <option value="ณัฐชา อัศวเสนา"></option>
+            <option value="สิทธิพงษ์ คงสิน"></option>
+            <option value="วิมลสิริ มณีเจริญ"></option>
+            <option value="ไอรินลดา อารยะเรืองปัญญา"></option>
+            <option value="ภูมิปรมภัทร์ บุญภูงา"></option>
+            <option value="สุภาภรณ์ วงษ์เขียน"></option>
+            <option value="อารียา เพ่งพินิจธรรม"></option>
+            <option value="ณัฐมน งอยผาลา"></option>
+            <option value="กชกร ปิ่นกุมภีร์"></option>
+            <option value="ณัฐมล เพชไพทูรย์"></option>
+            <option value="พลอยประกาย ธรรมขันธ์"></option>
+            <option value="พรไพลิน ปัททรัพย์"></option>
+            <option value="กรวรรณ หล้าบ้านโพน"></option>
+            <option value="นิธิโชติ จำพรต"></option>
+            <option value="ณัชชา เอื้ออุดมวโรดม"></option>
+            <option value="วรินทร หลวงปัน"></option>
+            <option value="ปณิธิ หวังเพื่อสุข"></option>
+            <option value="วิทุพร สระแก้ว"></option>
+            <option value="วีรดา ภูมินำ"></option>
+            <option value="พิตตินัทธ์ รุ่งขจรทรัพย์"></option>
+            <option value="กัญญา เขียวหวาน"></option>
+            <option value="ภูริช พินิจนิยม"></option>
+            <option value="โสภณ สุวรรณกุลโชติ"></option>
+            <option value="ศุภัชฌา สุขสมัย"></option>
+            <option value="พลพัต พลเสน"></option>
+            <option value="ศักดิ์สิทธิ์ รุ่งวงศา"></option>
+            <option value="ไกรวิชญ์ อรุณวัฒน์"></option>
+            <option value="เจษฎา แซ่ฉั่ว"></option>
+            <option value="จิดาภา วรรณปานไพร"></option>
+            <option value="กฤษตะวัน กลั่นกลิ่น"></option>
+            <option value="ภัทรวรรธน์ ชัยอนุวัฒน์"></option>
+            <option value="จรัญ คงมี"></option>
+            <option value="ยุวรัตน์ ศรีอุทธา"></option>
+            <option value="อัญชลี ชาตะวงค์"></option>
+            <option value="สุภิญญา ลาลี"></option>
+            <option value="กรานต์ โมฬีกุล"></option>
+            <option value="สิริพร หุ่นฉายศรี"></option>
+            <option value="กนกพร ศรีบุตร"></option>
+            <option value="กิตติภณ ตื่อสร้อย"></option>
+            <option value="สุนิตา ทองภู"></option>
+            <option value="วัชรกรณ์ เหลือสิงห์กุล"></option>
+            <option value="ธราทร เคียงสันเทียะ"></option>
+            <option value="อรัญญา ขุนอาราชอบช้าง"></option>
+            <option value="มินตรา วิทยากาญจน์"></option>
+            <option value="ยุวดี พวงยอด"></option>
+            <option value="เจนจิรา ศาลางาม"></option>
+            <option value="สุวิจักขญ์ ก๋าใน"></option>
+            <option value="วิธิชัย วงษา"></option>
+            <option value="มลฤดี ภิญโญ"></option>
+            <option value="สมชาย เมฆจินดา"></option>
+            <option value="สุภาภรณ์ แตไธสง"></option>
+            <option value="ราชัย แสงดี"></option>
+            <option value="รังสิมา พาพันธ์"></option>
+            <option value="ศิลาวรรณ ผ่องใส"></option>
+            <option value="นภัสสร ใจน้ำ"></option>
+            <option value="ศุภิสรา อัศวภูมิ"></option>
+            <option value="นิรุทธ์ ยะไวทย์"></option>
+            <option value="ยุทธภูมิ สีประหลาด"></option>
+            <option value="รณชัย หิรัญ"></option>
+            <option value="รณกร หิรัญ"></option>
+            <option value="มณีรัตน์ วงษ์ภักดี"></option>
+            <option value="ฉัตรชัย ปานเพ็ชร"></option>
+            <option value="สงคราม จันทะรังษี"></option>
+            <option value="อรสา แป้นสันเทียะ"></option>
+            <option value="ปานชนก ศรีพรม"></option>
+            <option value="อารียา บุญประกอบ"></option>
+            <option value="วรชาติ ไผ่งาม"></option>
+            <option value="มุกรินทร์ โพนทอง"></option>
+            <option value="พงษ์ณภัทร โคตรักษา"></option>
+            <option value="สุกัญญา เลขาพุทธิกุล"></option>
+            <option value="ปิยะกมล ผลไม้"></option>
+            <option value="ปุณณดา ครสิงห์"></option>
+            <option value="มงคล เฟื่องฟู"></option>
             <option value="จิรนันท์ กุลสุวรรณ"></option>
             <option value="ธีรยาภรณ์ สายสนิท"></option>
             <option value="วีรภัทร ใจกล้า"></option>
@@ -383,346 +409,7 @@
             <option value="อาทิตย์ ภาสการ"></option>
             <option value="ชนิศา อกอุ่น"></option>
             <option value="สายธาร จารุหา"></option>
-            <option value="มานิตา มูลทองสงค์"></option>
-            <option value="รินรดา ชัยวงศ์นาถ"></option>
-            <option value="ฉัตรสุรีย์ เมธีโรจน์"></option>
-            <option value="สัณห์สินี แซ่ตัง"></option>
-            <option value="กษมาพร แก้วลำพูน"></option>
-            <option value="วิลาสินี กิจคณะ"></option>
-            <option value="ปารณีย์ อัศวนนทาวงศ์"></option>
-            <option value="กนกพร เต็มวรทรัพย์"></option>
-            <option value="นวินดา บุญชู"></option>
-            <option value="อรกานต์ วิรุฬห์ศิริ"></option>
-            <option value="กัลยกร เลี่ยมไพฑูรย์"></option>
-            <option value="ศศิวรรณ วงษ์นิล"></option>
-            <option value="พรรณวดี เพ็ชรเครือ"></option>
-            <option value="เบญจมาศ เลิศพรตสมบัติ"></option>
-            <option value="ชลธิชา รุวานนท์"></option>
-            <option value="โชติกานต์ สุขสว่างโรจน์"></option>
-            <option value="ลิลลี่ หว่อง"></option>
-            <option value="พรนัชชา เกียรติมณีศรี"></option>
-            <option value="รุจิรดา ทีปภาศน์"></option>
-            <option value="ณฐพรรณ ทองใบ"></option>
-            <option value="ไอยวริญ บุญเจริญ"></option>
-            <option value="ธนพร ทรงอยู่"></option>
-            <option value="ธีราพร สุทนต์"></option>
-            <option value="ปริบุญญา นามบุตร"></option>
-            <option value="ขวัญชัย ขุมทอง"></option>
-            <option value="สุพัฒน์พงศ์ สิทธิชัย"></option>
-            <option value="ภูริช พินิจนิยม"></option>
-            <option value="โสภณ สุวรรณกุลโชติ"></option>
-            <option value="อาริยา โช"></option>
-            <option value="ศุภัชฌา สุขสมัย"></option>
-            <option value="ชนิตา กัลยาณภาคย์"></option>
-            <option value="ศิริศักดิ์ รักพร้า"></option>
-            <option value="วิรัญญา วันสืบ"></option>
-            <option value="ชณิตา พึ่งสุรภาพ"></option>
-            <option value="วชิราภรณ์ นีละมัย"></option>
-            <option value="ณัฐชา อัศวเสนา"></option>
-            <option value="เพชรน้ำหนึ่ง ลิมปจิตคุตาภรณ์"></option>
-            <option value="นัฐธินี เสาสูง"></option>
-            <option value="สิทธิพงษ์ คงสิน"></option>
-            <option value="ศรีนภา ตันงาม"></option>
-            <option value="วิมลสิริ มณีเจริญ"></option>
-            <option value="ไอรินลดา อารยะเรืองปัญญา"></option>
-            <option value="ทัชชาพิชญ์ ชยรัฐสิริมงคล"></option>
-            <option value="วิภาณี หลูโป"></option>
-            <option value="นวกชมณ ผลจันทร์"></option>
-            <option value="ชลิดา เพิ่มชาติ"></option>
-            <option value="ภูมิปรมภัทร์ บุญภูงา"></option>
-            <option value="ณัฐนันท์ ด่านแก้ว"></option>
-            <option value="อนุชา ร้อยแก้ว"></option>
-            <option value="ฐิติรัตน์ พานทอง"></option>
-            <option value="สุกัญญา คำสวาสดิ์"></option>
-            <option value="ธัญพร แถวเเถื่อน"></option>
-            <option value="กมลชนก บัวประทุม"></option>
-            <option value="ธัญชนก คำมี"></option>
-            <option value="มณฑล เจนนภาภัณฑ์กิจ"></option>
-            <option value="ภาวิณี นามนนท์"></option>
-            <option value="กันตพงศ์ เกิดสุริยวงษ์"></option>
-            <option value="พสิษฐ์ ธีระเลิศวงศ์"></option>
-            <option value="วิชชา ดาเพ็ง"></option>
-            <option value="ภูวนารถ ลัดดาวัลย์"></option>
-            <option value="ธนัตดา หุ่นท่าไม้"></option>
-            <option value="มธุรส เอี้ยงทอง"></option>
-            <option value="ภัทรดา ยินดี"></option>
-            <option value="สุชญา สุภัทรวณิช"></option>
-            <option value="YALING CHEN"></option>
-            <option value="กฤติณภัทร โตม่วง"></option>
-            <option value="XIN LI"></option>
-            <option value="CHEN JINBIAO"></option>
-            <option value="กันตา วรเพียรกุล"></option>
-            <option value="ปาณิสรา ศรีวงษ์"></option>
-            <option value="ธันยธรณ์ จักรไพศาล"></option>
-            <option value="วรินทร หลวงปัน"></option>
-            <option value="พุฒิพงศ์ ศรีศุภวัฒนะ"></option>
-            <option value="เบญญาภา พวงปัญญา"></option>
-            <option value="ณัฐวดี อนุภาพ"></option>
-            <option value="รัตนา สุดตัง"></option>
-            <option value="วิภา เอมสรรค์"></option>
-            <option value="บุศรา วราฤทธิชัย"></option>
-            <option value="หทัยรัตน์ แก้วโสภานิมิต"></option>
-            <option value="ศรุตยา สงวนวงศ์"></option>
-            <option value="ระวีวรรณ วิริยะธรรมสาร"></option>
-            <option value="กัญญาณัฐ ขำสัจจา"></option>
-            <option value="ธนัญญา ทองพิมพ์"></option>
-            <option value="ชนิสรา เลิศจตุพร"></option>
-            <option value="ธัญญนันต์ เสริมสายประสิทธิ์"></option>
-            <option value="ณรงค์ศักดิ์ ต้นทอง"></option>
-            <option value="กิ่งแก้ว ศรีโยหะ"></option>
-            <option value="พิพัชร์ ธรรมการฐิติคุณ"></option>
-            <option value="ธนดล วรงค์สิงหรา"></option>
-            <option value="ภัฏ ทองใหม่"></option>
-            <option value="เสาวลักษณ์ เปรมปรุงวิทย์"></option>
-            <option value="ธนเมศฐ์ เลิศสิริสกุลสุข"></option>
-            <option value="ธีรพัฒน์ นุตเจริญกุล"></option>
-            <option value="ศุภศิษฎิ์ สุวรรณอนุรังสี"></option>
-            <option value="วรัญญา ยั่งยืน"></option>
-            <option value="ปรียาวรรณรัฌ พุดพิมเสน"></option>
-            <option value="ฉัฐนันท์ อารีเพิ่มพร"></option>
-            <option value="วิชัย เขียวไข่กา"></option>
-            <option value="ชัยเมธ วรรธนเศรณี"></option>
-            <option value="กวิน เอกอรัญพงศ์"></option>
-            <option value="พัชรเดช ทาสะหลี"></option>
-            <option value="วิภาวี เดชจุ้ย"></option>
-            <option value="ช่อผกา เศรษฐการวิจิตร"></option>
-            <option value="ธัญพัธร์ ยืนยงค์นาน"></option>
-            <option value="ณัชชา อ๊อตจังหรีด"></option>
-            <option value="ชัชวาลย์ เสริมสุขประเสริฐ"></option>
-            <option value="ชนาธิป ชาญชัยศรี"></option>
-            <option value="สิรินภา เรืองเดช"></option>
-            <option value="ศิวพร มีชัย"></option>
-            <option value="พัชรวิภา มั่งประสิทธิ์"></option>
-            <option value="สถิรพร ทรัพย์เอนก"></option>
-            <option value="นภสร บุณยาคม"></option>
-            <option value="พงษ์เทพ เสเกกุล"></option>
-            <option value="ชลปรียา เสียงเสนาะ"></option>
-            <option value="คุณากร จารุไชยจินดา"></option>
-            <option value="ธนาธรณ์ ศรีคำหู้"></option>
-            <option value="ปพิชญา ไทยสมบูรณ์สุข"></option>
-            <option value="จิตสอางค์ ตุรีย์ตรัยพร"></option>
-            <option value="พิชญะวรรณ ชื่นบุญ"></option>
-            <option value="อภิรดี กิจสวัสดิ์"></option>
-            <option value="ยารวี ปลื้มสติ"></option>
-            <option value="รมัณยา อินคล้าย"></option>
-            <option value="ชุติมา พิณโกศล"></option>
-            <option value="อรนิดา บัวไชโย"></option>
-            <option value="รัฐติยา นิยมอําไพ"></option>
-            <option value="พิชชาอร ธีระบุตร"></option>
-            <option value="ธนัทปวินทร์ ใจแสน"></option>
-            <option value="สุภาวดี มุงเมือง"></option>
-            <option value="ชนิดา นิยมราษฏร์"></option>
-            <option value="พิทยุตม์ คฑารัตน์"></option>
-            <option value="ศุภาพิชญ์ เตชะนันท์มี"></option>
-            <option value="ดวิษ ตุติยากรณ์"></option>
-            <option value="ภิรมย์พร โชคเจริญ"></option>
-            <option value="เพ็ญจันทร์ ชัยอามาตย์"></option>
-            <option value="สงวนลักษณ์ สุวรรณงาม"></option>
-            <option value="ชาญชัย นิโรรัมย์"></option>
-            <option value="สุทธิพงษ์ วงศ์แก้ว"></option>
-            <option value="ศิรินัดดา เกตุอุดม"></option>
-            <option value="กุมารี ขำสัจจา"></option>
-            <option value="อากัณฌา ตรีปากี"></option>
-            <option value="ณัฐพร ศิริเกษ"></option>
-            <option value="รพีพรรณ วัชรวรรณวงศ์"></option>
-            <option value="ปิติพร เพ็งเพชร"></option>
-            <option value="ศุภิสรา กิติยะวงศ์"></option>
-            <option value="นพมาศ คงสุข"></option>
-            <option value="ดวงลดา ดวงใย"></option>
-            <option value="ว่าที่ร้อยตรี จิตเทพ"></option>
-            <option value="พีรชาญ เหม็งทะเหล็ก"></option>
-            <option value="สรรค์ ธนสิทธิ์สมบูรณ์"></option>
-            <option value="รุ่งวิกรัย จริยธำรงวิทย์"></option>
-            <option value="ณัฐณิชา อังศุโภไคย"></option>
-            <option value="วินัย หนูรูปงาม"></option>
-            <option value="ประดิษฐ์ แสนแก้ว"></option>
-            <option value="เฉิน จินเซิ้น"></option>
-            <option value="เฉิน จินจื้อ"></option>
-            <option value="นภัสวรรณ บุญประเสริฐ"></option>
-            <option value="ณัฐพงษ์ กมลนิมิตกุล"></option>
-            <option value="กนกอร คงธนาสมบูรณ์"></option>
-            <option value="พลพัต พลเสน"></option>
-            <option value="ศิริพร มณีบวรสิน"></option>
-            <option value="ศักดิ์สิทธิ์ รุ่งวงศา"></option>
-            <option value="ฐานิดา บุญชูศรี"></option>
-            <option value="ฐานิษา บุญชูศรี"></option>
-            <option value="ธิติมา มาลีรัตน์"></option>
-            <option value="ไกรวิชญ์ อรุณวัฒน์"></option>
-            <option value="สรยุทธิ์ นิลเกษม"></option>
-            <option value="พัชรากร แก้ววิเศษ"></option>
-            <option value="สุภิญญา ลาลี"></option>
-            <option value="เจษฎา แซ่ฉั่ว"></option>
-            <option value="จิดาภา วรรณปานไพร"></option>
-            <option value="กฤษตะวัน กลั่นกลิ่น"></option>
-            <option value="สุชาดา เจ็นประโคน"></option>
-            <option value="สมใจ ทองวงค์"></option>
-            <option value="ข้าวฟ่าง เมฆประดับ"></option>
-            <option value="อาทิตย์ ท้าวกอก"></option>
-            <option value="ดวงแก้ว เทียนน้ำเงิน"></option>
-            <option value="ชลธิชา ศาลางาม"></option>
-            <option value="สายชล บุนนาค"></option>
-            <option value="นุชจรินทร์ ทวีศรี"></option>
-            <option value="สุธินี ภู่สิทธิอมรชัย"></option>
-            <option value="ปัณฑารีย์ งามศิริโรจน์"></option>
-            <option value="สิเรียม สีดาสาร"></option>
-            <option value="กรานต์ โมฬีกุล"></option>
-            <option value="สิริพร หุ่นฉายศรี"></option>
-            <option value="ภัทรวรรธน์ ชัยอนุวัฒน์"></option>
-            <option value="กนกพร ศรีบุตร"></option>
-            <option value="กิตติภณ ตื่อสร้อย"></option>
-            <option value="สุนิตา ทองภู"></option>
-            <option value="จรัญ คงมี"></option>
-            <option value="วัชรกรณ์ เหลือสิงห์กุล"></option>
-            <option value="ธราทร เคียงสันเทียะ"></option>
-            <option value="อรัญญา ขุนอาราชอบช้าง"></option>
-            <option value="HONGXIN CHEN"></option>
-            <option value="มินตรา วิทยากาญจน์"></option>
-            <option value="อิทธิพร ปะวาระ"></option>
-            <option value="ยุวดี พวงยอด"></option>
-            <option value="เจนจิรา ศาลางาม"></option>
-            <option value="อดุลย์ บัวทอง"></option>
-            <option value="สุวิจักขญ์ ก๋าใน"></option>
-            <option value="วิธิชัย วงษา"></option>
-            <option value="ยุวรัตน์ ศรีอุทธา"></option>
-            <option value="อัญชลี ชาตะวงค์"></option>
-            <option value="มลฤดี ภิญโญ"></option>
-            <option value="สมชาย เมฆจินดา"></option>
-            <option value="สุภาภรณ์ แตไธสง"></option>
-            <option value="JUNXIN CHEN"></option>
-            <option value="ราชัย แสงดี"></option>
-            <option value="รังสิมา พาพันธ์"></option>
-            <option value="ศิลาวรรณ ผ่องใส"></option>
-            <option value="สาวนภัสสร ใจน้ำ"></option>
-            <option value="สาวศุภิสรา อัศวภูมิ"></option>
-            <option value="นิรุทธ์ ยะไวทย์"></option>
-            <option value="ยุทธภูมิ สีประหลาด"></option>
-            <option value="รณชัย หิรัญ"></option>
-            <option value="รณกร หิรัญ"></option>
-            <option value="สาวมณีรัตน์ วงษ์ภักดี"></option>
-            <option value="ฉัตรชัย ปานเพ็ชร"></option>
-            <option value="สาวสุภาพร นูแป"></option>
-            <option value="สงคราม จันทะรังษี"></option>
-            <option value="สาวอรสา แป้นสันเทียะ"></option>
-            <option value="กรรฐิฌา มาพร้อม"></option>
-            <option value="สาวปานชนก ศรีพรม"></option>
-            <option value="ภานุวัฒน์ ชุมแสง"></option>
-            <option value="อัมรินทร์ แก้วม่วง"></option>
-            <option value="สาวอารียา บุญประกอบ"></option>
-            <option value="ปัญญาเพชร เกษประทุม"></option>
-            <option value="สุนทร ตากุล"></option>
-            <option value="วรชาติ ไผ่งาม"></option>
-            <option value="ภูวดล ราชครู"></option>
-            <option value="มุกรินทร์ โพนทอง"></option>
-            <option value="พงษ์ณภัทร โคตรักษา"></option>
-            <option value="สุกัญญา เลขาพุทธิกุล"></option>
-            <option value="พิธิวัฒน์ ไชยโย"></option>
-            <option value="ปิยะกมล ผลไม้"></option>
-            <option value="ปุณณดา ครสิงห์"></option>
-            <option value="มงคล เฟื่องฟู"></option>
-            <option value="ปณิธิ หวังเพื่อสุข"></option>
-            <option value="วิทุพร สระแก้ว"></option>
-            <option value="วีรดา ภูมินำ"></option>
-            <option value="พิตตินัทธ์ รุ่งขจรทรัพย์"></option>
-            <option value="กัญญา เขียวหวาน"></option>
-            <option value="สุภาภรณ์ วงษ์เขียน"></option>
-            <option value="อารียา เพ่งพินิจธรรม"></option>
-            <option value="ณัฐมน งอยผาลา"></option>
-            <option value="กชกร ปิ่นกุมภีร์"></option>
-            <option value="ณัฐมล เพชไพทูรย์"></option>
-            <option value="พลอยประกาย ธรรมขันธ์"></option>
-            <option value="พรไพลิน ปัททรัพย์"></option>
-            <option value="กรวรรณ หล้าบ้านโพน"></option>
-            <option value="นิธิโชติ จำพรต"></option>
-            <option value="ณัชชา เอื้ออุดมวโรดม"></option>
-            <option value="มันฑนา แซ่เล้า"></option>
-            <option value="อำพล แก้วมณี"></option>
-            <option value="อิทธิพล ปุ่มเเก้ว"></option>
-            <option value="สุริยา มโนชาติ"></option>
-            <option value="โกศล ประสาทพรชัย"></option>
-            <option value="ญาณิศา พากเพียร"></option>
-            <option value="ศุภิกา เปียงต๊ะ"></option>
-            <option value="ปรัชญา คงทอง"></option>
-            <option value="ศิราม ทับทองคำ"></option>
-            <option value="เบญจพร ไชยวงค์"></option>
-            <option value="พรกมล โยธาตรี"></option>
-            <option value="ปิยะมน สนมะเริง"></option>
-            <option value="พรวรรค์ โพธิ์ทอง"></option>
-            <option value="กัญญารัตน์ ป้อมเปรม"></option>
-            <option value="อามีน สาเเละ"></option>
-            <option value="บุญยอด ดีเกิด"></option>
-            <option value="สราทิพย์ ชิณจักร์"></option>
-            <option value="สุภัทรพร สุนธะวงษ์"></option>
-            <option value="ปิยะธิดา แนงเเหยม"></option>
-            <option value="พิมพร สุทธิบุตร"></option>
-            <option value="ณัฐิดา สุขคณิต"></option>
-            <option value="สุดารัตน์ เขื่องถุ่ง"></option>
-            <option value="โยษิตา นิสาธรณ์"></option>
-            <option value="ลักษมี แสงแก้ว"></option>
-            <option value="พัสตราภรณ์ งามวิจิตร"></option>
-            <option value="ธิติมา จงจำเนียร"></option>
-            <option value="เกศราภรณ์ เทพธีรเทียนชัย"></option>
-            <option value="สมชาย ม่วงประเสริฐ"></option>
-            <option value="กฤษณะ ปะระกัง"></option>
-            <option value="กัลยกร อุสาย"></option>
-            <option value="ศรัณพร​ สมาน"></option>
-            <option value="อนัญญ์นพ เหลี่ยมมกราเจริญ"></option>
-            <option value="ปรียานุช อินทรีย์"></option>
-            <option value="นฤมล ทาลา"></option>
-            <option value="สุวาภา อาบสุวรรณ์"></option>
-            <option value="ลลินี ประเสริฐสุข"></option>
-            <option value="ณัฐวุฒิ เซี่ยงหว่อง"></option>
-            <option value="ทิพย์สุดา แสงดาว"></option>
-            <option value="สุกานดา โสพันธ์"></option>
-            <option value="สิรินดา ปันตา"></option>
-            <option value="เสาวนิต วงเเหวน"></option>
-            <option value="อภิญญา เมืองโคตร"></option>
-            <option value="รุจิภาส ปิติสานต์"></option>
-            <option value="พิชิตชล ยาดี"></option>
-            <option value="จิรวดี พันธ์พฤกษ์"></option>
-            <option value="นรีรัตน์ จันทร์เปรียง"></option>
-            <option value="วัลวิษา ดีเเก้ว"></option>
-            <option value="วรางคณา ชนบท"></option>
-            <option value="อภิสิทธิ์ นามเสาร์"></option>
-            <option value="ชานนท์ แทวกระโทก"></option>
-            <option value="พีระพล พลพินิจ"></option>
-            <option value="ศิรินาฏ ด้วยสีดำ"></option>
-            <option value="สุธีร์ เนยสูงเนิน"></option>
-            <option value="ธนากร สุวรักษ์"></option>
-            <option value="เมธิญานี รักประทุม"></option>
-            <option value="นันทิยา โพธิสาร"></option>
-            <option value="ศรนรินทร์ ไชยวุฒิ"></option>
-            <option value="เจริญชัย สีตากรณ์"></option>
-            <option value="พันธิตรา อ.วิจิตรอนันท์"></option>
-            <option value="ปาริชาติ ศิราบุญญสิริ"></option>
-            <option value="มนทกานต์ พรมนิกร"></option>
-            <option value="พีระยุทธ เบียดนอก"></option>
-            <option value="ณัฐศักดิ์ อำนวย"></option>
-            <option value="ธนากร ธัญญาธนสุข"></option>
-            <option value="อนุวัฒน์ มงคล"></option>
-            <option value="ยุทธนา ศรีภูมิเดิม"></option>
-            <option value="อดิเทพ กลิ่นโภคา"></option>
-            <option value="มณฐกาญจน์ ยศพรโภคิณ"></option>
-            <option value="น้ำฝน อินทร์โสม"></option>
-            <option value="อาทิตย์ สำอางค์อินทร์"></option>
-            <option value="เอกวุฒิ โซวเกียรติรุ่ง"></option>
-            <option value="ควีนกนก แก้วทอง"></option>
-            <option value="กิตติภูมิ อนันต์"></option>
-            <option value="จิรพัฒน์ เอี่ยมมัน"></option>
-            <option value="กีรติ แก้วย้อย"></option>
-            <option value="ชยุตพงศ์ แดงเรือง"></option>
-            <option value="ศรัญญู กล่อมแก้ว"></option>
-            <option value="ธีรนันท์ เหลือสูงเนิน"></option>
-            <option value="ชนันธร ปราณี"></option>
-            <option value="ธาดา ตันศิริสกุล"></option>
-            <option value="นิชกานต์ สัจจะมติ"></option>
-            <option value="ศุภชัย โชติชื่น"></option>
-            <option value="อนุชิต สังออน"></option>
-            <option value="พัชรา เปสุยะ"></option>
-            <option value="ธนินภัทร รตนอนันต์"></option>
-            <option value="วชิระ ศรีดี"></option>
-            <option value="ปฏิภาณ ภูพานเพชร"></option>
-            <option value="ปิฏิพงษ์ บุตรสาร"></option>
-            <option value="โอบนิธิ เท่งเจียว"></option>
+            <option value="ณรงค์ฤทธิ์ เทียบสา"></option>
           </datalist>
         </div>
 
@@ -732,127 +419,73 @@
   </main>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOD8OnnqPA-07Vs6MFn9HFuiV2wdxg8pp4onrtm4ndZF3SFjlDhSj7VvHwpGm-yVHs/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhxGQ2gzHHCmfKRfFZjyf9HUMd94S7wNF3lWOVRtUauPayGpo2meKvk4vorrPdPkfJ/exec";
 
     const I18N = {
       th: {
-        title: "ลงทะเบียน",
-        subtitle: "งานเลี้ยงบริษัท — กรอกข้อมูลให้ครบ แล้วกดส่ง",
-        nick: "ชื่อเล่น", first: "ชื่อจริง", last: "นามสกุล",
-        team: "ทีม", email: "อีเมล",
-        phNick: "เช่น: บีม", phFirst: "เช่น: คนงาม",
-        phLast: "เช่น: ใจดี", phEmail: "your@email.com",
-        hintEmail: "ระบบจะส่งรหัสยืนยันและรหัสผู้ลงทะเบียนไปยังอีเมลนี้",
-        btn: "ส่งลงทะเบียน",
-        helper: "* แนะนำให้เลือกชื่อจากรายการเพื่อป้องกันสะกดผิด",
-        okTitle: "✅ ลงทะเบียนสำเร็จ!",
-        okSub: "รหัสผู้ลงทะเบียนของคุณ\n(ตรวจสอบอีเมลเพื่อดูรายละเอียด)",
-        sending: "กำลังส่ง...",
-        errMissing: "กรุณากรอกข้อมูลให้ครบทุกช่อง",
-        errUrl: "กรุณาใส่ Web App URL ที่ลงท้าย /exec ให้ถูกต้อง",
-        warnNotFound:
-          "⚠️ ไม่พบชื่อนี้ในรายชื่อแนะนำ\n" +
-          "แนะนำให้พิมพ์แล้วเลือกชื่อเต็มจากรายการเพื่อกันสะกดผิด\n" +
-          "(ยังสามารถส่งได้หากเป็นชื่อใหม่)",
-        matchPicked: "✓ เลือกจากรายชื่อแล้ว",
-        matchOk: "✓ ตรงกับรายชื่อ",
-        footer: "SHD • Company Party Registration",
-        teamPlaceholder: "เลือกทีมของคุณ",
-        teams: [
-          { value: "Admin", label: "Admin" },
-          { value: "Brand shop", label: "Brand shop" },
-          { value: "Dealer", label: "Dealer" },
-          { value: "Graphic Designer", label: "Graphic Designer" },
-          { value: "KAM", label: "KAM" },
-          { value: "Marketing", label: "Marketing" },
-          { value: "Sale - Offline", label: "Sale - Offline" },
-          { value: "Support", label: "Support" },
-          { value: "TIKTOK", label: "TikTok" },
-          { value: "Warehouse", label: "Warehouse" },
-          { value: "After-sales", label: "After-sales (Claims)" },
-          { value: "Accounting", label: "Accounting" },
-          { value: "HR", label: "HR" },
-          { value: "Intern", label: "Intern" },
+        title:"ลงทะเบียน", subtitle:"งานเลี้ยงบริษัท — กรอกข้อมูลให้ครบ แล้วกดส่ง",
+        nick:"ชื่อเล่น", first:"ชื่อจริง", last:"นามสกุล", team:"ทีม", email:"อีเมล",
+        phNick:"เช่น: บีม", phFirst:"เช่น: คนงาม", phLast:"เช่น: ใจดี", phEmail:"your@email.com",
+        hintEmail:"ระบบจะส่งรหัสยืนยันและรหัสผู้ลงทะเบียนไปยังอีเมลนี้",
+        btn:"ส่งลงทะเบียน", helper:"* แนะนำให้เลือกชื่อจากรายการเพื่อป้องกันสะกดผิด",
+        okTitle:"✅ ลงทะเบียนสำเร็จ!", okSub:"รหัสผู้ลงทะเบียนของคุณ\n(ตรวจสอบอีเมลเพื่อดูรายละเอียด)",
+        sending:"กำลังส่ง...", errMissing:"กรุณากรอกข้อมูลให้ครบทุกช่อง",
+        errUrl:"กรุณาใส่ Web App URL ที่ลงท้าย /exec ให้ถูกต้อง",
+        warnNotFound:"⚠️ ไม่พบชื่อนี้ในรายชื่อแนะนำ\nแนะนำให้พิมพ์แล้วเลือกชื่อเต็มจากรายการเพื่อกันสะกดผิด\n(ยังสามารถส่งได้หากเป็นชื่อใหม่)",
+        matchPicked:"✓ เลือกจากรายชื่อแล้ว", matchOk:"✓ ตรงกับรายชื่อ",
+        footer:"SHD • Company Party Registration", teamPlaceholder:"เลือกทีมของคุณ",
+        teams:[
+          {value:"Admin",label:"Admin"},{value:"Brand shop",label:"Brand shop"},
+          {value:"Dealer",label:"Dealer"},{value:"Graphic Designer",label:"Graphic Designer"},
+          {value:"KAM",label:"KAM"},{value:"Marketing",label:"Marketing"},
+          {value:"Sale - Offline",label:"Sale - Offline"},{value:"Support",label:"Support"},
+          {value:"TIKTOK",label:"TikTok"},{value:"Warehouse",label:"Warehouse"},
+          {value:"After-sales",label:"After-sales (Claims)"},{value:"Accounting",label:"Accounting"},
+          {value:"HR",label:"HR"},{value:"Intern",label:"Intern"},
         ]
       },
       en: {
-        title: "Sign Up",
-        subtitle: "Company Party — please complete the form and submit",
-        nick: "Nickname", first: "First name", last: "Last name",
-        team: "Team", email: "Email",
-        phNick: "e.g., Beam", phFirst: "e.g., Elijah",
-        phLast: "e.g., Mateo", phEmail: "your@email.com",
-        hintEmail: "Your registration code and confirmation will be sent here",
-        btn: "Submit Registration",
-        helper: "* Please select from the suggestions to avoid typos",
-        okTitle: "✅ Registered successfully!",
-        okSub: "Your registration code\n(Check your email for details)",
-        sending: "Submitting...",
-        errMissing: "Please fill in all required fields",
-        errUrl: "Please set a valid Web App URL ending with /exec",
-        warnNotFound:
-          "⚠️ This name is not in the suggested list.\n" +
-          "Please select a full name from suggestions to avoid typos.\n" +
-          "(You can still submit if it's a new name.)",
-        matchPicked: "✓ Selected from list",
-        matchOk: "✓ Matched suggestion",
-        footer: "SHD • Company Party Registration",
-        teamPlaceholder: "Select your team",
-        teams: [
-          { value: "Admin", label: "Admin" },
-          { value: "Brand shop", label: "Brand shop" },
-          { value: "Dealer", label: "Dealer" },
-          { value: "Graphic Designer", label: "Graphic Designer" },
-          { value: "KAM", label: "KAM" },
-          { value: "Marketing", label: "Marketing" },
-          { value: "Sale - Offline", label: "Sale - Offline" },
-          { value: "Support", label: "Support" },
-          { value: "TIKTOK", label: "TikTok" },
-          { value: "Warehouse", label: "Warehouse" },
-          { value: "After-sales", label: "After-sales (Claims)" },
-          { value: "Accounting", label: "Accounting" },
-          { value: "HR", label: "HR" },
-          { value: "Intern", label: "Intern" },
+        title:"Sign Up", subtitle:"Company Party — please complete the form and submit",
+        nick:"Nickname", first:"First name", last:"Last name", team:"Team", email:"Email",
+        phNick:"e.g., Beam", phFirst:"e.g., Elijah", phLast:"e.g., Mateo", phEmail:"your@email.com",
+        hintEmail:"Your registration code and confirmation will be sent here",
+        btn:"Submit Registration", helper:"* Please select from the suggestions to avoid typos",
+        okTitle:"✅ Registered successfully!", okSub:"Your registration code\n(Check your email for details)",
+        sending:"Submitting...", errMissing:"Please fill in all required fields",
+        errUrl:"Please set a valid Web App URL ending with /exec",
+        warnNotFound:"⚠️ This name is not in the suggested list.\nPlease select a full name from suggestions to avoid typos.\n(You can still submit if it is a new name.)",
+        matchPicked:"✓ Selected from list", matchOk:"✓ Matched suggestion",
+        footer:"SHD • Company Party Registration", teamPlaceholder:"Select your team",
+        teams:[
+          {value:"Admin",label:"Admin"},{value:"Brand shop",label:"Brand shop"},
+          {value:"Dealer",label:"Dealer"},{value:"Graphic Designer",label:"Graphic Designer"},
+          {value:"KAM",label:"KAM"},{value:"Marketing",label:"Marketing"},
+          {value:"Sale - Offline",label:"Sale - Offline"},{value:"Support",label:"Support"},
+          {value:"TIKTOK",label:"TikTok"},{value:"Warehouse",label:"Warehouse"},
+          {value:"After-sales",label:"After-sales (Claims)"},{value:"Accounting",label:"Accounting"},
+          {value:"HR",label:"HR"},{value:"Intern",label:"Intern"},
         ]
       },
       zh: {
-        title: "报名",
-        subtitle: "公司聚会 — 请填写信息并提交",
-        nick: "昵称", first: "名字", last: "姓氏",
-        team: "团队", email: "邮箱",
-        phNick: "例如：大能", phFirst: "例如：彩红",
-        phLast: "例如：晨", phEmail: "your@email.com",
-        hintEmail: "系统将向此邮箱发送报名确认码",
-        btn: "提交报名",
-        helper: "* 建议从列表中选择姓名以避免拼写错误",
-        okTitle: "✅ 报名成功！",
-        okSub: "您的报名编号\n（请查看邮件了解详情）",
-        sending: "正在提交...",
-        errMissing: "请填写所有必填项",
-        errUrl: "请设置正确的 Web App URL（以 /exec 结尾）",
-        warnNotFound:
-          "⚠️ 建议列表中未找到该姓名。\n" +
-          "建议从提示中选择全名以避免拼写错误。\n" +
-          "（如果是新姓名也可以提交）",
-        matchPicked: "✓ 已从列表选择",
-        matchOk: "✓ 与建议匹配",
-        footer: "SHD • Company Party Registration",
-        teamPlaceholder: "请选择团队",
-        teams: [
-          { value: "Admin", label: "Admin" },
-          { value: "Brand shop", label: "Brand shop" },
-          { value: "Dealer", label: "Dealer" },
-          { value: "Graphic Designer", label: "Graphic Designer" },
-          { value: "KAM", label: "KAM" },
-          { value: "Marketing", label: "Marketing" },
-          { value: "Sale - Offline", label: "Sale - Offline" },
-          { value: "Support", label: "Support" },
-          { value: "TIKTOK", label: "TikTok" },
-          { value: "Warehouse", label: "Warehouse" },
-          { value: "After-sales", label: "After-sales (Claims)" },
-          { value: "Accounting", label: "Accounting" },
-          { value: "HR", label: "HR" },
-          { value: "Intern", label: "Intern" },
+        title:"报名", subtitle:"公司聚会 — 请填写信息并提交",
+        nick:"昵称", first:"名字", last:"姓氏", team:"团队", email:"邮箱",
+        phNick:"例如：大能", phFirst:"例如：彩红", phLast:"例如：晨", phEmail:"your@email.com",
+        hintEmail:"系统将向此邮箱发送报名确认码",
+        btn:"提交报名", helper:"* 建议从列表中选择姓名以避免拼写错误",
+        okTitle:"✅ 报名成功！", okSub:"您的报名编号\n（请查看邮件了解详情）",
+        sending:"正在提交...", errMissing:"请填写所有必填项",
+        errUrl:"请设置正确的 Web App URL（以 /exec 结尾）",
+        warnNotFound:"⚠️ 建议列表中未找到该姓名。\n建议从提示中选择全名以避免拼写错误。\n（如果是新姓名也可以提交）",
+        matchPicked:"✓ 已从列表选择", matchOk:"✓ 与建议匹配",
+        footer:"SHD • Company Party Registration", teamPlaceholder:"请选择团队",
+        teams:[
+          {value:"Admin",label:"Admin"},{value:"Brand shop",label:"Brand shop"},
+          {value:"Dealer",label:"Dealer"},{value:"Graphic Designer",label:"Graphic Designer"},
+          {value:"KAM",label:"KAM"},{value:"Marketing",label:"Marketing"},
+          {value:"Sale - Offline",label:"Sale - Offline"},{value:"Support",label:"Support"},
+          {value:"TIKTOK",label:"TikTok"},{value:"Warehouse",label:"Warehouse"},
+          {value:"After-sales",label:"After-sales (Claims)"},{value:"Accounting",label:"Accounting"},
+          {value:"HR",label:"HR"},{value:"Intern",label:"Intern"},
         ]
       }
     };
@@ -860,13 +493,12 @@
     const LANG_KEY = "party_form_lang";
     let currentLang = localStorage.getItem(LANG_KEY) || "th";
 
-    const $ = (id) => document.getElementById(id);
+    const $ = id => document.getElementById(id);
     const langBtn   = $("langBtn");
     const langMenu  = $("langMenu");
     const form      = $("regForm");
     const toast     = $("toast");
     const submitBtn = $("submitBtn");
-
     const nicknameInput = $("nickname");
     const firstInput    = $("first_name");
     const lastInput     = $("last_name");
@@ -874,97 +506,96 @@
     const teamSelect    = $("team");
     const matchPill     = $("matchPill");
 
-    function safeSetText(el, text){ if (el) el.textContent = text || ""; }
-    function normalizeSpace(s){ return (s || "").toString().replace(/\s+/g, " ").trim(); }
+    function safeSetText(el,text){ if(el) el.textContent = text||""; }
+    function normalizeSpace(s){ return (s||"").toString().replace(/\s+/g," ").trim(); }
 
-    function showToast(msg, type, regId){
-      toast.className = "toast " + (type || "");
+    function showToast(msg,type,regId,tableNo){
+      toast.className = "toast "+(type||"");
       toast.innerHTML = "";
-
       const p = document.createElement("div");
       p.textContent = msg;
       toast.appendChild(p);
-
-      if (regId) {
+      if(regId){
         const badge = document.createElement("div");
         badge.className = "regBadge";
         badge.textContent = regId;
         toast.appendChild(badge);
       }
-
+      if(tableNo){
+        const tb = document.createElement("div");
+        tb.className = "tableBadge";
+        tb.innerHTML =
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+          '<rect x="3" y="3" width="18" height="3" rx="1"/>' +
+          '<path d="M5 6v13M19 6v13M8 19h8"/></svg>' +
+          'โต๊ะที่นั่ง&nbsp;<strong style="font-size:18px;letter-spacing:1px;">'+tableNo+'</strong>';
+        toast.appendChild(tb);
+      }
       toast.style.display = "block";
     }
-
-    function clearToast(){ toast.style.display = "none"; toast.innerHTML = ""; toast.className = "toast"; }
-
+    function clearToast(){ toast.style.display="none"; toast.innerHTML=""; toast.className="toast"; }
     function setMatchPill(text){
-      if (!text){ matchPill.style.display = "none"; matchPill.textContent = ""; return; }
-      matchPill.style.display = "inline-block";
-      matchPill.textContent = text;
+      if(!text){ matchPill.style.display="none"; matchPill.textContent=""; return; }
+      matchPill.style.display="inline-block"; matchPill.textContent=text;
     }
-
     function splitName(full){
       const t = normalizeSpace(full);
-      if (!t) return null;
+      if(!t) return null;
       const arr = t.split(" ");
-      if (arr.length === 1) return { first: arr[0], last: "" };
-      return { first: arr[0], last: arr.slice(1).join(" ") };
+      if(arr.length===1) return {first:arr[0],last:""};
+      return {first:arr[0],last:arr.slice(1).join(" ")};
     }
 
     const optionFullnames = Array.from(document.querySelectorAll("#staffFullnames option"))
-      .map(o => (o.getAttribute("value") || "").trim()).filter(Boolean);
-
+      .map(o=>(o.getAttribute("value")||"").trim()).filter(Boolean);
     const fullToParts = new Map();
-    for (const full of optionFullnames) {
+    for(const full of optionFullnames){
       const parts = splitName(full);
-      if (parts) fullToParts.set(full, parts);
+      if(parts) fullToParts.set(full,parts);
     }
 
     function tryAutofillLastName(){
       const v = normalizeSpace(firstInput.value);
-      if (!v){ setMatchPill(""); return; }
+      if(!v){ setMatchPill(""); return; }
       const parts = fullToParts.get(v);
-      if (parts){
+      if(parts){
         firstInput.value = parts.first;
-        lastInput.value  = parts.last || "";
-        setMatchPill((I18N[currentLang] || I18N.th).matchPicked);
-        clearToast();
-        return;
+        lastInput.value  = parts.last||"";
+        setMatchPill((I18N[currentLang]||I18N.th).matchPicked);
+        clearToast(); return;
       }
       setMatchPill("");
     }
 
     firstInput.addEventListener("change", tryAutofillLastName);
     firstInput.addEventListener("blur",   tryAutofillLastName);
-    lastInput.addEventListener("input",   () => setMatchPill(""));
+    lastInput.addEventListener("input",   ()=>setMatchPill(""));
 
     function renderTeams(lang){
-      const T    = I18N[lang] || I18N.th;
-      const prev = teamSelect.value || teamSelect.getAttribute("data-prev") || "";
+      const T    = I18N[lang]||I18N.th;
+      const prev = teamSelect.value||teamSelect.getAttribute("data-prev")||"";
       teamSelect.innerHTML = "";
-      const ph   = document.createElement("option");
-      ph.value   = ""; ph.disabled = true; ph.selected = true;
+      const ph = document.createElement("option");
+      ph.value=""; ph.disabled=true; ph.selected=true;
       ph.textContent = T.teamPlaceholder;
       teamSelect.appendChild(ph);
-      for (const t of T.teams){
+      for(const t of T.teams){
         const opt = document.createElement("option");
-        opt.value = t.value; opt.textContent = t.label;
+        opt.value=t.value; opt.textContent=t.label;
         teamSelect.appendChild(opt);
       }
-      if (prev){
-        const found = Array.from(teamSelect.options).find(o => o.value === prev);
-        if (found) teamSelect.value = prev;
+      if(prev){
+        const found = Array.from(teamSelect.options).find(o=>o.value===prev);
+        if(found) teamSelect.value=prev;
       }
     }
 
     function applyLang(lang){
       currentLang = lang;
-      localStorage.setItem(LANG_KEY, lang);
-      const T = I18N[lang] || I18N.th;
-
-      document.documentElement.lang = lang === "zh" ? "zh" : (lang === "en" ? "en" : "th");
-      document.title = T.title + " · Company Party";
-
+      localStorage.setItem(LANG_KEY,lang);
+      const T = I18N[lang]||I18N.th;
+      document.documentElement.lang = lang==="zh"?"zh":(lang==="en"?"en":"th");
+      document.title = T.title+" · Company Party";
       safeSetText($("ui_title"),    T.title);
       safeSetText($("ui_subtitle"), T.subtitle);
       safeSetText($("ui_lbl_nick"), T.nick);
@@ -975,80 +606,64 @@
       safeSetText($("ui_hint_email"),T.hintEmail);
       safeSetText($("ui_helper"),   T.helper);
       safeSetText($("ui_footer"),   T.footer);
-
-      if (nicknameInput) nicknameInput.placeholder = T.phNick;
-      if (firstInput)    firstInput.placeholder    = T.phFirst;
-      if (lastInput)     lastInput.placeholder     = T.phLast;
-      if (emailInput)    emailInput.placeholder    = T.phEmail;
-      if (submitBtn)     submitBtn.textContent     = T.btn;
-
+      if(nicknameInput) nicknameInput.placeholder=T.phNick;
+      if(firstInput)    firstInput.placeholder=T.phFirst;
+      if(lastInput)     lastInput.placeholder=T.phLast;
+      if(emailInput)    emailInput.placeholder=T.phEmail;
+      if(submitBtn)     submitBtn.textContent=T.btn;
       renderTeams(lang);
     }
 
-    teamSelect.addEventListener("change", () => teamSelect.setAttribute("data-prev", teamSelect.value));
+    teamSelect.addEventListener("change",()=>teamSelect.setAttribute("data-prev",teamSelect.value));
 
     function toggleLangMenu(force){
-      const open = typeof force === "boolean" ? force : !langMenu.classList.contains("open");
-      langMenu.classList.toggle("open", open);
+      const open = typeof force==="boolean"?force:!langMenu.classList.contains("open");
+      langMenu.classList.toggle("open",open);
     }
-    langBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleLangMenu(); });
-    document.addEventListener("click", () => toggleLangMenu(false));
-    langMenu.addEventListener("click", (e) => {
+    langBtn.addEventListener("click",(e)=>{ e.stopPropagation(); toggleLangMenu(); });
+    document.addEventListener("click",()=>toggleLangMenu(false));
+    langMenu.addEventListener("click",(e)=>{
       const btn = e.target.closest("[data-lang]");
-      if (!btn) return;
-      teamSelect.setAttribute("data-prev", teamSelect.value || "");
+      if(!btn) return;
+      teamSelect.setAttribute("data-prev",teamSelect.value||"");
       applyLang(btn.getAttribute("data-lang"));
       toggleLangMenu(false);
     });
 
-    form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", async(e)=>{
       e.preventDefault();
-      const T = I18N[currentLang] || I18N.th;
-
-      if (!SCRIPT_URL || !SCRIPT_URL.includes("/exec")){
-        showToast(T.errUrl, "err"); return;
-      }
-
+      const T = I18N[currentLang]||I18N.th;
+      if(!SCRIPT_URL||!SCRIPT_URL.includes("/exec")){ showToast(T.errUrl,"err"); return; }
       tryAutofillLastName();
-
       const nickname   = normalizeSpace(nicknameInput.value);
       const first_name = normalizeSpace(firstInput.value);
       const last_name  = normalizeSpace(lastInput.value);
       const team       = normalizeSpace(teamSelect.value);
       const email      = normalizeSpace(emailInput.value);
-
-      if (!nickname || !first_name || !last_name || !team || !email){
-        showToast(T.errMissing, "err"); return;
-      }
-
-      const fullTyped     = normalizeSpace(first_name + " " + last_name);
+      if(!nickname||!first_name||!last_name||!team||!email){ showToast(T.errMissing,"err"); return; }
+      const fullTyped     = normalizeSpace(first_name+" "+last_name);
       const isWhitelisted = optionFullnames.includes(fullTyped);
-      if (!isWhitelisted){ showToast(T.warnNotFound, "warn"); }
-      else { setMatchPill(T.matchOk); }
-
+      if(!isWhitelisted){ showToast(T.warnNotFound,"warn"); }
+      else{ setMatchPill(T.matchOk); }
       submitBtn.disabled    = true;
       submitBtn.textContent = T.sending;
-
-      try {
-        const body = new URLSearchParams({ nickname, first_name, last_name, team, email, lang: currentLang });
-        const res  = await fetch(SCRIPT_URL, { method: "POST", body });
-        const data = await res.json().catch(() => ({}));
-
-        if (data && data.ok){
-          const regId = data.reg_id || "";
-          showToast(T.okTitle + "\n" + T.okSub, "ok", regId);
-          form.reset();
-          setMatchPill("");
-          teamSelect.setAttribute("data-prev", "");
-          applyLang(currentLang);
+      try{
+        const body = new URLSearchParams({nickname,first_name,last_name,team,email,lang:currentLang});
+        const res  = await fetch(SCRIPT_URL,{method:"POST",body});
+        const data = await res.json().catch(()=>({}));
+        if(data&&data.ok){
+          const regId   = data.reg_id||"";
+          const tableNo = data.table_no||"";
+          showToast(T.okTitle+"\n"+T.okSub,"ok",regId,tableNo);
+          form.reset(); setMatchPill(""); teamSelect.setAttribute("data-prev",""); applyLang(currentLang);
         } else {
-          showToast("❌ " + (data.error || "UNKNOWN_ERROR"), "err");
+          showToast("❌ "+(data.error||"UNKNOWN_ERROR"),"err");
         }
-      } catch (err) {
-        showToast("❌ " + String(err), "err");
-      } finally {
+      } catch(err){
+        showToast("❌ "+String(err),"err");
+      } finally{
         submitBtn.disabled    = false;
-        submitBtn.textContent = (I18N[currentLang] || I18N.th).btn;
+        submitBtn.textContent = (I18N[currentLang]||I18N.th).btn;
       }
     });
 
